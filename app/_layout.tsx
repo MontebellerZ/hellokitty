@@ -1,29 +1,33 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import AppHolder from "@/components/AppHolder";
+import Controls from "@/components/Controls";
+import Figurinhas from "@/components/Figurinhas";
+import ModalView from "@/components/ModalView";
+import { BackgroundProvider } from "@/contexts/BackgroundContext";
+import { ModalProvider } from "@/contexts/ModalContext";
+import { StatusBar } from "expo-status-bar";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+function AppWithContexts() {
+  return (
+    <>
+      <AppHolder>
+        <StatusBar style="dark" hidden />
+
+        <Controls />
+
+        <Figurinhas />
+      </AppHolder>
+
+      <ModalView />
+    </>
+  );
+}
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <BackgroundProvider>
+      <ModalProvider>
+        <AppWithContexts />
+      </ModalProvider>
+    </BackgroundProvider>
   );
 }

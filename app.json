@@ -1,42 +1,39 @@
 {
   "expo": {
-    "name": "hellokitty",
+    "name": "Hello Kitty",
     "slug": "hellokitty",
     "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "orientation": "default",
+    "icon": "./assets/icon/icon.png",
     "scheme": "hellokitty",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "ios": {
-      "supportsTablet": true
-    },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/icon/icon.png",
+        "backgroundColor": "#f7c1ea"
       },
-      "edgeToEdgeEnabled": true
-    },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "edgeToEdgeEnabled": true,
+      "package": "com.montebellerz.hellokitty"
     },
     "plugins": [
-      "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#f7c1ea",
+          "image": "./assets/icon/icon.png",
+          "resizeMode": "cover",
+          "imageWidth": 100
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ca163339-b908-489d-8bfc-0d918e371893"
+      }
     }
   }
 }
