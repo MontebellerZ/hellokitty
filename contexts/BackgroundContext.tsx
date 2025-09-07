@@ -34,7 +34,7 @@ export const BackgroundProvider: React.FC<BackgroundProviderProps> = ({ children
 export const useBackground = (): BackgroundContextType => {
   const context = useContext(BackgroundContext);
   if (context === undefined) {
-    throw new Error("useBackground must be used within a BackgroundProvider");
+    throw new Error("useBackground deve ser usado de dentro de BackgroundProvider");
   }
   return context;
 };

@@ -1,5 +1,6 @@
+import { useFigurinhas } from "@/contexts/FigurinhasContext";
 import { useModal } from "@/contexts/ModalContext";
-import { Figurinha, loadFigurinhas, saveFigurinhas } from "@/utils/figurinhas";
+import { Figurinha } from "@/utils/figurinhas";
 import { useEffect, useMemo, useState } from "react";
 import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from "react-native";
 import ConfirmarFigurinhaModal from "../ConfirmarFigurinhaModal";
@@ -32,6 +33,8 @@ function FigurinhaView(props: FigurinhaViewProps) {
   }
 
   useEffect(() => {
+    if (coletado === props.figurinha.coletada) return;
+
     props.coletarFigurinha(props.figurinha, coletado);
   }, [coletado, props]);
 
@@ -56,19 +59,14 @@ function FigurinhaView(props: FigurinhaViewProps) {
 }
 
 export default function Figurinhas() {
-  const [figurinhas, setFigurinhas] = useState<Figurinha[]>();
+  const { figurinhas, setFigurinhas } = useFigurinhas();
 
   async function coletarFigurinha(figurinha: Figurinha, coletada: boolean) {
     if (!figurinhas) return;
 
     figurinha.coletada = coletada;
-    const newFigurinhas = await saveFigurinhas(figurinhas);
-    setFigurinhas(newFigurinhas);
+    setFigurinhas(figurinhas);
   }
-
-  useEffect(() => {
-    loadFigurinhas().then(setFigurinhas);
-  }, []);
 
   const coletadas = useMemo(
     () => figurinhas?.reduce((sum, f) => (f.coletada ? sum + 1 : sum), 0) || 0,

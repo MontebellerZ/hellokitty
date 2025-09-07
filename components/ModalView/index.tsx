@@ -7,7 +7,14 @@ export default function ModalView() {
   const { content, close } = useModal();
 
   return (
-    <Modal visible={!!content} animationType="slide" transparent onRequestClose={close}>
+    <Modal
+      visible={!!content}
+      animationType="slide"
+      transparent
+      onRequestClose={close}
+      statusBarTranslucent
+      hardwareAccelerated
+    >
       <View style={styles.modal}>
         <View style={styles.innerModal}>
           {content}

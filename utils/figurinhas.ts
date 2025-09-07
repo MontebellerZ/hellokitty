@@ -43,7 +43,7 @@ function normalizarFigurinhas(figurinhas: Figurinha[]) {
 }
 
 async function resetCachedFigurinhas() {
-  return await saveFigurinhas(defaultFigurinhas);
+  return saveFigurinhas(defaultFigurinhas);
 }
 
 export async function loadFigurinhas() {
@@ -60,16 +60,16 @@ export async function loadFigurinhas() {
 
     const figurinhas = normalizarFigurinhas(figsArmazenadas);
 
-    return await saveFigurinhas(figurinhas);
+    return saveFigurinhas(figurinhas);
   } catch (err) {
     console.error("Erro ao carregar figurinhas:", err);
     return resetCachedFigurinhas();
   }
 }
 
-export async function saveFigurinhas(figurinhas: Figurinha[]) {
+export function saveFigurinhas(figurinhas: Figurinha[]) {
   cachedFigurinhas = cloneFigurinhas(figurinhas);
   const jsonFigs = JSON.stringify(cachedFigurinhas);
-  await AsyncStorage.setItem(FIGURINHAS_KEY, jsonFigs);
+  AsyncStorage.setItem(FIGURINHAS_KEY, jsonFigs);
   return cloneFigurinhas(cachedFigurinhas);
 }
