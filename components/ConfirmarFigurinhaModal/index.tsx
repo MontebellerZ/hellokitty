@@ -13,10 +13,12 @@ export default function ConfirmarFigurinhaModal(props: ConfirmarFigurinhaModalPr
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
-        {!props.coletado ? "Confirmar que a figurinha " : "Realmente quer desmarcar a figurinha "}
-        <Text style={styles.titleDark}>{props.figurinha.id}</Text>
-        {!props.coletado ? " foi coletada?" : "?"}
+        {!props.coletado
+          ? "Deseja coletar essa figurinha?"
+          : "Realmente quer desmarcar essa figurinha?"}
       </Text>
+
+      <Text style={styles.figurinhaId}>{props.figurinha.id}</Text>
 
       <View style={styles.controles}>
         <TouchableOpacity style={[styles.btn, styles.btnCancelar]} onPress={props.onCancelar}>

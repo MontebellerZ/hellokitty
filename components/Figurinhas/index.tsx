@@ -40,18 +40,10 @@ function FigurinhaView(props: FigurinhaViewProps) {
 
   return (
     <TouchableOpacity
-      style={{
-        ...styles.figurinha,
-        ...(coletado ? styles.figurinhaColetada : {}),
-      }}
+      style={[styles.figurinha, coletado ? styles.figurinhaColetada : {}]}
       onPress={selectFigurinha}
     >
-      <Text
-        style={{
-          ...styles.figurinhaText,
-          ...(coletado ? styles.figurinhaColetadaText : {}),
-        }}
-      >
+      <Text style={[styles.figurinhaText, coletado ? styles.figurinhaColetadaText : {}]}>
         {props.figurinha.id}
       </Text>
     </TouchableOpacity>

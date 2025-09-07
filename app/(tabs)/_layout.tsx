@@ -43,10 +43,6 @@ export default function TabsLayout() {
           }}
         />
       </Tabs>
-
-      {/* <Controls />
-
-        <Figurinhas /> */}
     </>
   );
 }

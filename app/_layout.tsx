@@ -1,4 +1,5 @@
 import AppHolder from "@/components/AppHolder";
+import Controls from "@/components/Controls";
 import ModalView from "@/components/ModalView";
 import { BackgroundProvider } from "@/contexts/BackgroundContext";
 import { FigurinhasProvider } from "@/contexts/FigurinhasContext";
@@ -11,6 +12,8 @@ function AppWithContexts() {
   return (
     <>
       <AppHolder>
+        <Controls />
+
         <Stack
           screenOptions={{
             headerShown: false,

@@ -6,6 +6,7 @@ export default StyleSheet.create({
     gap: 10,
     flexDirection: "row",
     alignItems: "center",
+    marginBottom: 8,
   },
   buttons: {
     backgroundColor: Colors.transparency(Colors.background, 0.85),

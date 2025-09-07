@@ -12,8 +12,9 @@ export default StyleSheet.create({
     maxWidth: "80%",
     textAlign: "center",
   },
-  titleDark: {
+  figurinhaId: {
     fontWeight: "bold",
+    fontSize: 60,
   },
   controles: {
     flexDirection: "row",

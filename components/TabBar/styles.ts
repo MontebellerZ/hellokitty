@@ -5,6 +5,8 @@ export default StyleSheet.create({
   container: {
     backgroundColor: Colors.transparent,
     alignItems: "center",
+    marginBottom: 6,
+    marginTop: 8,
   },
   navBar: {
     flexDirection: "row",
@@ -16,8 +18,6 @@ export default StyleSheet.create({
     paddingHorizontal: 24,
     gap: 24,
     elevation: 2,
-    marginBottom: 6,
-    marginTop: 8
   },
   navBtn: {
     alignItems: "center",

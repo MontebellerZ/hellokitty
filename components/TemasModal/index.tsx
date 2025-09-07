@@ -18,7 +18,7 @@ export default function TemasModal() {
               source={bg.src}
               contentPosition={bg.align}
               contentFit={styles.backIcon.resizeMode}
-              style={{ ...styles.backIcon, aspectRatio: bg.dimensions?.ratio }}
+              style={[styles.backIcon, { aspectRatio: bg.dimensions?.ratio }]}
             />
             {back.src === bg.src && (
               <View style={styles.backSelected}>

@@ -1,4 +1,5 @@
 import { useBackground } from "@/contexts/BackgroundContext";
+import { useFonts } from "expo-font";
 import { ImageBackground } from "expo-image";
 import * as SplashScreen from "expo-splash-screen";
 import { PropsWithChildren, useEffect } from "react";
@@ -8,11 +9,21 @@ import styles from "./styles";
 SplashScreen.preventAutoHideAsync();
 
 export default function AppHolder(props: PropsWithChildren) {
+  const [fontLoaded, fontError] = useFonts({
+    Boldins: require("../../assets/fonts/Boldins.otf"),
+  });
+
   const { back } = useBackground();
 
   useEffect(() => {
-    setTimeout(() => SplashScreen.hide(), 1000);
-  }, []);
+    if (fontLoaded || fontError) {
+      SplashScreen.hideAsync();
+    }
+
+    if (fontError) {
+      console.error("Font Error:", fontError);
+    }
+  }, [fontLoaded, fontError]);
 
   return (
     <ImageBackground
