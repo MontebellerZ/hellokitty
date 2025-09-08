@@ -1,9 +1,9 @@
 import { Text, View } from "react-native";
 
-export default function Teste() {
+export default function Repetidas() {
   return (
     <View>
-      <Text>Teste tadasd nsajgflasdhf lewkjahfb</Text>
+      <Text>Repetidas</Text>
     </View>
   );
 }

@@ -15,5 +15,5 @@
     "**/*.d.ts",
     "expo-env.d.ts",
     "assets/**/*"
-  ]
+, "scripts/build.js"  ]
 }

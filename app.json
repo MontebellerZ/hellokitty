@@ -2,13 +2,14 @@
   "expo": {
     "name": "Hello Kitty",
     "slug": "hellokitty",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "default",
     "icon": "./assets/icon/icon.png",
     "scheme": "hellokitty",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "android": {
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon/icon.png",
         "backgroundColor": "#f7c1ea"
