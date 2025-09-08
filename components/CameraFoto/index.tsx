@@ -73,9 +73,9 @@ export default function CameraFoto(props: CameraFotoProps) {
   const usingRatio = orientation === "portrait" ? RATIOS[0].styleRatio.v : RATIOS[0].styleRatio.h;
 
   useEffect(() => {
-    if (!permission?.granted && permission?.canAskAgain) {
-      requestPermission();
-    }
+    if (permission?.granted) return;
+
+    requestPermission();
   }, [requestPermission, permission]);
 
   if (!permission?.granted) return <View />;

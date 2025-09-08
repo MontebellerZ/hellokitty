@@ -1,17 +1,19 @@
 import { useFigurinhas } from "@/contexts/FigurinhasContext";
+import { useFotos } from "@/contexts/FotosContext";
 import { useModal } from "@/contexts/ModalContext";
 import { Figurinha } from "@/utils/figurinhas";
 import { updateCacheFoto } from "@/utils/fotos";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useEffect, useMemo, useState } from "react";
 import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from "react-native";
+import { Toast } from "toastify-react-native";
 import ConfirmarFigurinhaModal from "../ConfirmarFigurinhaModal";
 import styles from "./styles";
 
 interface FigurinhaViewProps {
   figurinha: Figurinha;
   coletarFigurinha: (figurinha: Figurinha, coletada: boolean) => void;
-  fotografarFigurinha: (figurinha: Figurinha, foto: string) => void;
+  fotografarFigurinha: (figurinha: Figurinha, foto?: string) => void;
 }
 
 function FigurinhaView(props: FigurinhaViewProps) {
@@ -24,7 +26,7 @@ function FigurinhaView(props: FigurinhaViewProps) {
     close();
   }
 
-  function salvarFoto(foto: string) {
+  function salvarFoto(foto?: string) {
     props.fotografarFigurinha(props.figurinha, foto);
   }
 
@@ -62,20 +64,27 @@ function FigurinhaView(props: FigurinhaViewProps) {
 
 export default function Figurinhas() {
   const { figurinhas, setFigurinhas } = useFigurinhas();
+  const { setFotos } = useFotos();
 
   async function coletarFigurinha(figurinha: Figurinha, coletada: boolean) {
     if (!figurinhas) return;
 
     figurinha.coletada = coletada;
     setFigurinhas(figurinhas);
+
+    if (coletada) Toast.success("Figurinha coletada!");
+    else Toast.info("Figurinha desmarcada.");
   }
 
-  async function fotografarFigurinha(figurinha: Figurinha, foto: string) {
+  async function fotografarFigurinha(figurinha: Figurinha, foto?: string) {
     if (!figurinhas) return;
 
     figurinha.foto = foto;
-    updateCacheFoto(foto, figurinha);
+    setFotos(updateCacheFoto(figurinha, foto));
     setFigurinhas(figurinhas);
+
+    if (foto) Toast.success("Foto registrada!");
+    else Toast.warn("Não encontramos a foto da sua figurinha!");
   }
 
   const coletadas = useMemo(

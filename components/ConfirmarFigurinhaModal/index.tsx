@@ -13,7 +13,7 @@ import styles from "./styles";
 interface ConfirmarFigurinhaModalProps {
   onConfirmar: () => void;
   onCancelar: () => void;
-  onFoto: (foto: string) => void;
+  onFoto: (foto?: string) => void;
   figurinha: Figurinha;
   coletado: boolean;
 }
@@ -24,14 +24,11 @@ export default function ConfirmarFigurinhaModal(props: ConfirmarFigurinhaModalPr
   const [foto, setFoto] = useState<AssetType>();
 
   const definirFoto = useCallback(
-    (asset: AssetType) => {
-      // if (!asset) {
-      // }
-
-      if (foto?.id !== asset.id) props.onFoto(asset.id);
+    (asset?: AssetType) => {
+      if (props.figurinha.foto !== asset?.id) props.onFoto(asset?.id);
       setFoto(asset);
     },
-    [foto?.id, props]
+    [props]
   );
 
   async function salvarFoto(foto: CameraCapturedPicture) {

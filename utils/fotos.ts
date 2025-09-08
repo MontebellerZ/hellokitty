@@ -67,19 +67,21 @@ export async function saveFoto(foto: CameraCapturedPicture): Promise<AssetType> 
   return getLatestAsset(album);
 }
 
-export function updateCacheFoto(fotoId: string, figurinha: Figurinha) {
-  const foto = new Foto(fotoId, figurinha);
+export function updateCacheFoto(figurinha: Figurinha, fotoId?: string) {
+  const foto = fotoId ? new Foto(fotoId, figurinha) : undefined;
 
   if (!cachedFotos) {
-    cachedFotos = [foto];
-    return cachedFotos;
+    cachedFotos = foto ? [foto] : [];
+    return [...cachedFotos];
   }
 
   const index = cachedFotos.findIndex((c) => c.figurinha?.id === figurinha.id);
 
-  if (index >= 0) {
+  if (foto && index >= 0) {
     cachedFotos[index] = foto;
-  } else {
+  } else if (!foto && index >= 0) {
+    cachedFotos.splice(index, 1);
+  } else if (foto) {
     cachedFotos.push(foto);
     sortFigurinhasIds(cachedFotos);
   }

@@ -26,6 +26,11 @@ export default class Colors {
   static vermelho = "#d6213b";
   static dourado = "#daa520";
 
+  static toastSuccess = "#5cca5cff";
+  static toastInfo = "#9aa0edff";
+  static toastWarn = "#c79823ff";
+  static toastError = "#881010ff";
+
   static transparent = "#0000";
   static transparency = transpColor;
 }

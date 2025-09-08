@@ -1,6 +1,7 @@
 import AppHolder from "@/components/AppHolder";
 import Controls from "@/components/Controls";
 import ModalView from "@/components/ModalView";
+import { ToastConfigs } from "@/config/ToastConfigs";
 import { BackgroundProvider } from "@/contexts/BackgroundContext";
 import { FigurinhasProvider } from "@/contexts/FigurinhasContext";
 import { FotosProvider } from "@/contexts/FotosContext";
@@ -37,18 +38,20 @@ function AppWithContexts() {
 
 export default function RootLayout() {
   return (
-    <MediaProvider>
-      <OrientationProvider>
-        <FigurinhasProvider>
-          <FotosProvider>
-            <BackgroundProvider>
-              <ModalProvider>
-                <AppWithContexts />
-              </ModalProvider>
-            </BackgroundProvider>
-          </FotosProvider>
-        </FigurinhasProvider>
-      </OrientationProvider>
-    </MediaProvider>
+    <ToastConfigs>
+      <MediaProvider>
+        <OrientationProvider>
+          <FigurinhasProvider>
+            <FotosProvider>
+              <BackgroundProvider>
+                <ModalProvider>
+                  <AppWithContexts />
+                </ModalProvider>
+              </BackgroundProvider>
+            </FotosProvider>
+          </FigurinhasProvider>
+        </OrientationProvider>
+      </MediaProvider>
+    </ToastConfigs>
   );
 }
