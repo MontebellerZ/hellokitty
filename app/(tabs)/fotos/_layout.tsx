@@ -1,9 +1,11 @@
-import { Text, View } from "react-native";
+import Galeria from "@/components/Galeria";
+import { View } from "react-native";
+import styles from "./styles";
 
 export default function Teste() {
   return (
-    <View>
-      <Text>Teste tadasd nsajgflasdhf lewkjahfb</Text>
+    <View style={styles.container}>
+      <Galeria />
     </View>
   );
 }

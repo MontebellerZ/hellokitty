@@ -3,6 +3,7 @@ import Controls from "@/components/Controls";
 import ModalView from "@/components/ModalView";
 import { BackgroundProvider } from "@/contexts/BackgroundContext";
 import { FigurinhasProvider } from "@/contexts/FigurinhasContext";
+import { FotosProvider } from "@/contexts/FotosContext";
 import { MediaProvider } from "@/contexts/MediaPermissionContext";
 import { ModalProvider } from "@/contexts/ModalContext";
 import { OrientationProvider } from "@/contexts/OrientationContext";
@@ -39,11 +40,13 @@ export default function RootLayout() {
     <MediaProvider>
       <OrientationProvider>
         <FigurinhasProvider>
-          <BackgroundProvider>
-            <ModalProvider>
-              <AppWithContexts />
-            </ModalProvider>
-          </BackgroundProvider>
+          <FotosProvider>
+            <BackgroundProvider>
+              <ModalProvider>
+                <AppWithContexts />
+              </ModalProvider>
+            </BackgroundProvider>
+          </FotosProvider>
         </FigurinhasProvider>
       </OrientationProvider>
     </MediaProvider>

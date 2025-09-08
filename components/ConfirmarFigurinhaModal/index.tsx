@@ -1,6 +1,6 @@
 import { useModal } from "@/contexts/ModalContext";
 import { Figurinha } from "@/utils/figurinhas";
-import { AssetType, getFoto, saveFoto } from "@/utils/fotos";
+import { AssetType, getFoto, getRatio, saveFoto } from "@/utils/fotos";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { CameraCapturedPicture } from "expo-camera";
@@ -25,6 +25,9 @@ export default function ConfirmarFigurinhaModal(props: ConfirmarFigurinhaModalPr
 
   const definirFoto = useCallback(
     (asset: AssetType) => {
+      // if (!asset) {
+      // }
+
       if (foto?.id !== asset.id) props.onFoto(asset.id);
       setFoto(asset);
     },
@@ -44,7 +47,9 @@ export default function ConfirmarFigurinhaModal(props: ConfirmarFigurinhaModalPr
   }
 
   function verFoto() {
-    if (foto) setContent(<VerFoto foto={foto.uri} ratio={foto.width / foto.height} />);
+    if (!foto) return;
+
+    setContent(<VerFoto foto={foto.uri} ratio={getRatio(foto.width, foto.height)} />);
   }
 
   useEffect(() => {

@@ -218,3 +218,31 @@ export const figurinhasIds = [
 ] as const;
 
 export type FigurinhaIds = (typeof figurinhasIds)[number];
+
+type SortFigurinhasData =
+  | FigurinhaIds
+  | { id?: FigurinhaIds }
+  | { figurinha?: { id?: FigurinhaIds } };
+
+export function sortFigurinhasIds(ids: SortFigurinhasData[]) {
+  const positionMap = new Map<FigurinhaIds, number>();
+
+  figurinhasIds.forEach((id, index) => {
+    positionMap.set(id, index);
+  });
+
+  const getPosition = (item: SortFigurinhasData): number => {
+    const id =
+      typeof item === "string"
+        ? item
+        : "figurinha" in item
+        ? item.figurinha?.id
+        : "id" in item
+        ? item.id
+        : undefined;
+
+    return id ? positionMap.get(id) ?? Infinity : Infinity;
+  };
+
+  ids.sort((a: SortFigurinhasData, b: SortFigurinhasData) => getPosition(a) - getPosition(b));
+}

@@ -1,6 +1,7 @@
 import { useFigurinhas } from "@/contexts/FigurinhasContext";
 import { useModal } from "@/contexts/ModalContext";
 import { Figurinha } from "@/utils/figurinhas";
+import { updateCacheFoto } from "@/utils/fotos";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useEffect, useMemo, useState } from "react";
 import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from "react-native";
@@ -73,6 +74,7 @@ export default function Figurinhas() {
     if (!figurinhas) return;
 
     figurinha.foto = foto;
+    updateCacheFoto(foto, figurinha);
     setFigurinhas(figurinhas);
   }
 

@@ -1,10 +1,32 @@
 import { CameraCapturedPicture } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
+import { Figurinha, loadFigurinhas } from "./figurinhas";
+import { sortFigurinhasIds } from "./figurinhasIds";
 
 const MEDIA_ALBUM_NAME = "Álbum Hello Kitty";
 
 export type AssetType = MediaLibrary.Asset;
 export type AlbumType = MediaLibrary.Album;
+
+export class Foto {
+  id: string;
+  figurinha?: Figurinha;
+
+  constructor(fotoId: string, figurinha: Figurinha | undefined = undefined) {
+    this.id = fotoId;
+    this.figurinha = figurinha;
+  }
+
+  async getAsset() {
+    return await getFoto(this.id);
+  }
+}
+
+let cachedFotos: Foto[] | null = null;
+
+export function getRatio(width: number, height: number) {
+  return width / height;
+}
 
 export async function getAlbum(): Promise<AlbumType> {
   return await MediaLibrary.getAlbumAsync(MEDIA_ALBUM_NAME);
@@ -43,4 +65,35 @@ export async function saveFoto(foto: CameraCapturedPicture): Promise<AssetType> 
   album = await initAlbum(asset);
 
   return getLatestAsset(album);
+}
+
+export function updateCacheFoto(fotoId: string, figurinha: Figurinha) {
+  const foto = new Foto(fotoId, figurinha);
+
+  if (!cachedFotos) {
+    cachedFotos = [foto];
+    return cachedFotos;
+  }
+
+  const index = cachedFotos.findIndex((c) => c.figurinha?.id === figurinha.id);
+
+  if (index >= 0) {
+    cachedFotos[index] = foto;
+  } else {
+    cachedFotos.push(foto);
+    sortFigurinhasIds(cachedFotos);
+  }
+
+  return [...cachedFotos];
+}
+
+export async function getAllFotos(reset = false) {
+  if (cachedFotos && !reset) return cachedFotos;
+
+  const figurinhas = await loadFigurinhas();
+  const figsComFotos = figurinhas.filter((f) => f.foto).map((f) => new Foto(f.foto!, f));
+
+  cachedFotos = figsComFotos;
+
+  return [...cachedFotos];
 }
