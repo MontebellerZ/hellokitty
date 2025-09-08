@@ -1,6 +1,7 @@
 import { useFigurinhas } from "@/contexts/FigurinhasContext";
 import { useModal } from "@/contexts/ModalContext";
 import { Figurinha } from "@/utils/figurinhas";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import { useEffect, useMemo, useState } from "react";
 import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from "react-native";
 import ConfirmarFigurinhaModal from "../ConfirmarFigurinhaModal";
@@ -9,6 +10,7 @@ import styles from "./styles";
 interface FigurinhaViewProps {
   figurinha: Figurinha;
   coletarFigurinha: (figurinha: Figurinha, coletada: boolean) => void;
+  fotografarFigurinha: (figurinha: Figurinha, foto: string) => void;
 }
 
 function FigurinhaView(props: FigurinhaViewProps) {
@@ -21,6 +23,10 @@ function FigurinhaView(props: FigurinhaViewProps) {
     close();
   }
 
+  function salvarFoto(foto: string) {
+    props.fotografarFigurinha(props.figurinha, foto);
+  }
+
   function selectFigurinha() {
     setContent(
       <ConfirmarFigurinhaModal
@@ -28,6 +34,7 @@ function FigurinhaView(props: FigurinhaViewProps) {
         coletado={coletado}
         onCancelar={close}
         onConfirmar={confirmarFigurinha}
+        onFoto={salvarFoto}
       />
     );
   }
@@ -46,6 +53,8 @@ function FigurinhaView(props: FigurinhaViewProps) {
       <Text style={[styles.figurinhaText, coletado ? styles.figurinhaColetadaText : {}]}>
         {props.figurinha.id}
       </Text>
+
+      {props.figurinha.foto && <AntDesign name="star" style={styles.figurinhaFotografada} />}
     </TouchableOpacity>
   );
 }
@@ -57,6 +66,13 @@ export default function Figurinhas() {
     if (!figurinhas) return;
 
     figurinha.coletada = coletada;
+    setFigurinhas(figurinhas);
+  }
+
+  async function fotografarFigurinha(figurinha: Figurinha, foto: string) {
+    if (!figurinhas) return;
+
+    figurinha.foto = foto;
     setFigurinhas(figurinhas);
   }
 
@@ -88,7 +104,11 @@ export default function Figurinhas() {
           contentContainerStyle={styles.flatlistContent}
           data={figurinhas}
           renderItem={({ item }) => (
-            <FigurinhaView figurinha={item} coletarFigurinha={coletarFigurinha} />
+            <FigurinhaView
+              figurinha={item}
+              coletarFigurinha={coletarFigurinha}
+              fotografarFigurinha={fotografarFigurinha}
+            />
           )}
           keyExtractor={(item) => item.id}
         />

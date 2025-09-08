@@ -25,6 +25,22 @@
           "resizeMode": "cover",
           "imageWidth": 100
         }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Permitir acesso à câmera",
+          "microphonePermission": "Permitir acesso ao microfone",
+          "recordAudioAndroid": true
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Permitir acesso às fotos",
+          "savePhotosPermission": "Permitir salvar fotos",
+          "isAccessMediaLocationEnabled": true
+        }
       ]
     ],
     "experiments": {

@@ -3,7 +3,9 @@ import Controls from "@/components/Controls";
 import ModalView from "@/components/ModalView";
 import { BackgroundProvider } from "@/contexts/BackgroundContext";
 import { FigurinhasProvider } from "@/contexts/FigurinhasContext";
+import { MediaProvider } from "@/contexts/MediaPermissionContext";
 import { ModalProvider } from "@/contexts/ModalContext";
+import { OrientationProvider } from "@/contexts/OrientationContext";
 import Colors from "@/utils/colors";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -34,12 +36,16 @@ function AppWithContexts() {
 
 export default function RootLayout() {
   return (
-    <FigurinhasProvider>
-      <BackgroundProvider>
-        <ModalProvider>
-          <AppWithContexts />
-        </ModalProvider>
-      </BackgroundProvider>
-    </FigurinhasProvider>
+    <MediaProvider>
+      <OrientationProvider>
+        <FigurinhasProvider>
+          <BackgroundProvider>
+            <ModalProvider>
+              <AppWithContexts />
+            </ModalProvider>
+          </BackgroundProvider>
+        </FigurinhasProvider>
+      </OrientationProvider>
+    </MediaProvider>
   );
 }

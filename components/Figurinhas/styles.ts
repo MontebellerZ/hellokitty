@@ -43,10 +43,22 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: Colors.branco,
+    position: "relative",
   },
   figurinhaText: {
     color: Colors.vermelho,
     fontWeight: 600,
+  },
+  figurinhaFotografada: {
+    color: Colors.roxo,
+    fontWeight: 600,
+    position: "absolute",
+    top: 0,
+    right: 0,
+    transform: "translate(30%, -30%)",
+    fontSize: 16,
+    textShadowColor: Colors.branco,
+    textShadowRadius: 1,
   },
   figurinhaColetada: {
     backgroundColor: Colors.rosa,

@@ -7,23 +7,19 @@ export class Figurinha {
   id: FigurinhaIds;
   coletada: boolean = false;
   repetidas: number = 0;
+  foto?: string;
 
-  constructor(id: FigurinhaIds) {
+  constructor(id: FigurinhaIds, data: Partial<Figurinha> = {}) {
     this.id = id;
+    Object.assign(this, data);
   }
 
   clone(): Figurinha {
-    const fig = new Figurinha(this.id);
-    fig.coletada = this.coletada;
-    fig.repetidas = this.repetidas;
-    return fig;
+    return new Figurinha(this.id, this);
   }
 
   static hardClone(original: Figurinha): Figurinha {
-    const fig = new Figurinha(original.id);
-    fig.coletada = original.coletada;
-    fig.repetidas = original.repetidas;
-    return fig;
+    return new Figurinha(original.id, original);
   }
 }
 

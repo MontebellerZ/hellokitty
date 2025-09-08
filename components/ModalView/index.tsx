@@ -7,23 +7,29 @@ export default function ModalView() {
   const { content, close } = useModal();
 
   return (
-    <Modal
-      visible={!!content}
-      animationType="slide"
-      transparent
-      onRequestClose={close}
-      statusBarTranslucent
-      hardwareAccelerated
-    >
-      <View style={styles.modal}>
-        <View style={styles.innerModal}>
-          {content}
+    <>
+      {content.map((modal, i) => (
+        <Modal
+          key={i}
+          visible={!!modal}
+          animationType="slide"
+          transparent
+          onRequestClose={close}
+          statusBarTranslucent
+          hardwareAccelerated
+          style={content.at(-1) === modal ? { display: "none" } : {}}
+        >
+          <View style={styles.modal}>
+            <View style={styles.innerModal}>
+              {modal}
 
-          <TouchableOpacity style={styles.close} onPress={close}>
-            <Entypo name="cross" style={styles.closeIcon} />
-          </TouchableOpacity>
-        </View>
-      </View>
-    </Modal>
+              <TouchableOpacity style={styles.close} onPress={close}>
+                <Entypo name="cross" style={styles.closeIcon} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+      ))}
+    </>
   );
 }

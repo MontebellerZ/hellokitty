@@ -1,8 +1,9 @@
 import React, { createContext, ReactNode, useContext, useState } from "react";
 
 interface ModalContextType {
-  content: ReactNode | undefined;
-  setContent: (content: ReactNode | undefined) => void;
+  content: ReactNode[];
+  setContent: (content?: ReactNode) => void;
+  resetContent: (content?: ReactNode) => void;
   close: () => void;
 }
 
@@ -13,9 +14,24 @@ interface ModalProviderProps {
 }
 
 export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
-  const [content, setContent] = useState<ReactNode>();
+  const [contentList, setContentList] = useState<ReactNode[]>([]);
 
-  const value = { content, setContent, close: () => setContent(undefined) };
+  const changeContent = (content?: ReactNode) => {
+    setContentList((contentList) =>
+      content ? [...contentList, content] : contentList.slice(0, -1)
+    );
+  };
+
+  const changeResetContent = (content?: ReactNode) => {
+    setContentList(content ? [content] : []);
+  };
+
+  const value = {
+    content: contentList,
+    setContent: changeContent,
+    resetContent: changeResetContent,
+    close: () => changeContent(undefined),
+  };
 
   return <ModalContext.Provider value={value}>{children}</ModalContext.Provider>;
 };

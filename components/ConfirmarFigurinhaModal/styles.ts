@@ -14,8 +14,31 @@ export default StyleSheet.create({
   },
   figurinhaId: {
     fontWeight: "bold",
-    fontSize: 60,
+    fontSize: 80,
+    lineHeight: 60,
+    color: Colors.texto,
   },
+  fotoBtn: {
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 6,
+    backgroundColor: Colors.azulClaro,
+    borderRadius: 100,
+    elevation: 2,
+    padding: 10,
+    aspectRatio: 1,
+  },
+  fotoBtnIcon: {
+    fontSize: 20,
+  },
+  fotoBtnText: {
+    textAlign: "center",
+    fontSize: 16,
+  },
+  fotoTiradaBtn: {
+    backgroundColor: Colors.rosaClaro,
+  },
+  foto: {},
   controles: {
     flexDirection: "row",
     alignItems: "center",

@@ -24,6 +24,7 @@ export default class Colors {
   static rosa = "#ec3fa8";
   static roxo = "#8d4f98";
   static vermelho = "#d6213b";
+  static dourado = "#daa520";
 
   static transparent = "#0000";
   static transparency = transpColor;
